@@ -1,0 +1,20 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import {getters} from '@/store/getters'
+import {actions} from '@/store/actions'
+import {mutations} from '@/store/mutations'
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+	state: {
+		authStatus: false,
+		userInfo: [],
+		uid: null,
+		items: [],
+	},
+	getters: getters,
+	mutations: mutations,
+	actions: actions
+})

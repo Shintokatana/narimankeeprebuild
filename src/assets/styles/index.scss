@@ -1,0 +1,24 @@
+@import "normalize";
+@import "colors";
+
+body {
+	background-color: $color_background;
+	min-height: 100vh;
+	color: $color_white;
+}
+
+a,
+input {
+	outline: none;
+}
+
+a,
+input[type='submit'] {
+	transition: .4s ease all;
+	text-decoration: none;
+	color: $color_white;
+	&:hover {
+		color: $color_vue;
+	}
+}
+
