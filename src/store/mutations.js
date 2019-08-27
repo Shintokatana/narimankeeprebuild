@@ -11,13 +11,13 @@ export const mutations = {
 	setItems: (state, items) => {
 		state.items = items
 	},
-
-
 	addLocalItem: (state, payload) => {
 		state.items.push(payload)
 	},
 	deleteLocalItem: ( state, id ) => {
-		console.log(id);
-		console.log(state.items);
+		state.items = state.items.filter(item => item.id !== id);
+	},
+	updateItems: (state, items ) => {
+		state.items = items
 	}
 };

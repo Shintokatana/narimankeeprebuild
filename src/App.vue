@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <logo/>
-        <transition name="fade" mode="out-in">
+        <transition
+                name="fade"
+                mode="out-in">
             <router-view/>
         </transition>
     </div>
@@ -13,8 +15,8 @@ import logo from '@/components/global/logo'
     export default {
 		name: 'App',
 		components: {
-			logo
-		}
+			logo,
+		},
 	}
 
 </script>

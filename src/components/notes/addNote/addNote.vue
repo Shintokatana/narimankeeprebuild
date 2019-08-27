@@ -21,10 +21,14 @@
 			addItem() {
 				let item = {
 					title: this.$refs.title.value,
-                    description: this.$refs.description.value
-                };
+					description: this.$refs.description.value,
+                    order: 0
+				};
 				this.$store.dispatch('addItem', item)
-            }
+					.catch(error => {
+						console.log(error)
+					})
+			}
         }
 	}
 </script>

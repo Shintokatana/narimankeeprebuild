@@ -1,5 +1,6 @@
 @import "normalize";
 @import "colors";
+@import "grid";
 
 body {
 	background-color: $color_background;
@@ -22,3 +23,20 @@ input[type='submit'] {
 	}
 }
 
+.event-icon {
+
+	svg {
+		width: 18px;
+		height: 18px;
+		path {
+			transition: .4s ease all;
+			fill: white;
+		}
+	}
+
+	&:hover {
+		path {
+			fill: #42b883;
+		}
+	}
+}

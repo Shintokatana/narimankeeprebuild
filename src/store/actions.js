@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import {firebaseConfig} from "@/config";
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -28,24 +29,30 @@ export const actions = {
 
 	addItem: (context, payload) => {
 		let userUID = context.getters.getUID;
-		db.collection('notes_' + userUID).add(payload)
-			.then((docRef) => {
-				payload.id = docRef.id;
-				context.commit('addLocalItem', payload);
-			})
+		let test = db.collection('notes_' + userUID);
+		test.orderBy("order", "desc").limit(1).get()
+			.then(querySnapshot => {
+				querySnapshot.forEach( doc => {
+					payload.order = doc.data().order + 1;
+				});
+				db.collection('notes_' + userUID).add(payload)
+					.then((docRef) => {
+						payload.id = docRef.id;
+						context.commit('addLocalItem', payload);
+					});
+			});
 	},
+
 	deleteItem: (context, id) => {
-		console.log(id);
+		context.commit('deleteLocalItem', id);
 		db.collection('notes_' + context.getters.getUID ).doc(id)
 			.delete()
-			.then(() => {
-				context.commit('deleteLocalItem', id)
+			.catch(error => {
+				console.log(error)
 			})
-		// let userUID = context.getters.getUID;
-		// db.collection('notes_' + userUID).doc(id)
-		// 	.delete()
-		// 	.then((response) =>{
-		// 		console.log(response);
-		// 	})
+	},
+
+	updateItems: (context, payload ) => {
+		context.commit('updateItems', payload)
 	}
 };
