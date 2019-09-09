@@ -13,8 +13,10 @@
 			logout() {
 				firebase.auth().signOut()
 					.then(() => {
-						this.$router.replace('login');
-						this.$store.commit('setUID', null)
+						this.$router.replace('login')
+                            .then(() => {
+								this.$store.commit('setUID', null)
+							})
 					})
 					.catch((error) => {
 						console.log(error)

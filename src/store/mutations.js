@@ -17,7 +17,14 @@ export const mutations = {
 	deleteLocalItem: ( state, id ) => {
 		state.items = state.items.filter(item => item.id !== id);
 	},
-	updateItems: (state, items ) => {
+	updateItemsOrder: (state, items ) => {
 		state.items = items
+	},
+	updateItem: (state, item) => {
+		state.items.forEach((element, index) => {
+			if (element.id === item.id ) {
+				state.items[index] = item
+			}
+		})
 	}
 };

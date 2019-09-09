@@ -7,7 +7,7 @@ import {mutations} from '@/store/mutations'
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
 	state: {
 		authStatus: false,
 		userInfo: [],
@@ -16,5 +16,7 @@ export default new Vuex.Store({
 	},
 	getters: getters,
 	mutations: mutations,
-	actions: actions
-})
+	actions: actions,
+});
+
+export default store

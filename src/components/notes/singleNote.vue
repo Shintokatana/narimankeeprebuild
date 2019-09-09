@@ -1,8 +1,12 @@
 <template>
     <div class="single-note col-xl-3 col-lg-3 col-md-6 col-sm-12">
         <div class="note-body">
-            {{item.title}}
-            {{item.description}}
+            <label>
+                <input type="text" ref="title" v-model="newItem.title" @change="commitChanges">
+            </label>
+            <label>
+                <input type="text" ref="description" v-model="newItem.description" @change="commitChanges">
+            </label>
             <a @click.prevent="deleteItem(item.id)" class="event-icon close-icon" href="#"><icon icon="close"/></a>
         </div>
     </div>
@@ -17,13 +21,24 @@
         components: {
 			icon
         },
+		data() {
+			return {
+				newItem: this.item
+			}
+		},
         methods: {
 			deleteItem(id) {
 				this.$store.dispatch('deleteItem', id)
 					.catch(error => {
 						console.log(error)
 					})
-			}
+			},
+			commitChanges() {
+				this.$store.dispatch('updateItem', this.newItem)
+                    .catch(error => {
+						console.log(error)
+					})
+            }
 		}
 	}
 </script>
@@ -36,6 +51,12 @@
         border-radius: 10px 0 10px 0;
         padding: 15px;
         transition: .4s ease all;
+
+        input {
+            background: transparent;
+            color: white;
+            border: none;
+        }
 
         &:hover {
             background-color: rgba(238, 238, 238, 0.05);

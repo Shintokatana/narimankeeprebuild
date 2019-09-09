@@ -29,16 +29,10 @@
         computed: {
 			notes: {
 				get() {
-					// let self = this;
-					// return self.$store.getters.getItems.sort((e, f) => {
-					// 	return e.order - f.order
-					// })
 					return this.$store.getters.getItems
 				},
 				set(array) {
-					console.log();
-					console.log(array);
-					this.$store.dispatch('updateItems', array)
+					this.$store.dispatch('updateItemsOrder', array)
 						.catch((error) => {
 							console.log(error)
 						})

@@ -2,10 +2,14 @@
     <div class="new-item-form">
         <form action="/">
             <div>
-                <input type="text" ref="title" placeholder="Note Title">
+                <label>
+                    <input type="text" ref="title" placeholder="Note Title">
+                </label>
             </div>
             <div>
-                <input type="text" ref="description" placeholder="Note Content">
+                <label>
+                    <input type="text" ref="description" placeholder="Note Content">
+                </label>
             </div>
             <div>
                 <input type="submit" value="Add Note" @click.prevent="addItem">
@@ -21,8 +25,7 @@
 			addItem() {
 				let item = {
 					title: this.$refs.title.value,
-					description: this.$refs.description.value,
-                    order: 0
+					description: this.$refs.description.value
 				};
 				this.$store.dispatch('addItem', item)
 					.catch(error => {
