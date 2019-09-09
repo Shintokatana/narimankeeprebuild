@@ -2,6 +2,9 @@ export const mutations = {
 	fireLogin: (state, payload) => {
 		state.userInfo = payload
 	},
+	searchStatus: (state, payload) => {
+		state.searchStatus = payload
+	},
 	authStatus: state => {
 		state.authStatus = true
 	},

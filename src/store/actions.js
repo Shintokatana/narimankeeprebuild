@@ -71,13 +71,10 @@ export const actions = {
 
 	updateItem: (context, payload) => {
 		const userUID = context.getters.getUID;
-		let id = payload.id;
-		delete payload.id;
-		let test = JSON.parse(JSON.stringify(payload));
-		db.collection('notes_' + userUID).doc(id)
-			.update(test)
+		let parsed = JSON.parse(JSON.stringify(payload));
+		db.collection('notes_' + userUID).doc(payload.id)
+			.update(parsed)
 			.then(() => {
-				payload.id = id;
 				context.commit('updateItem', payload);
 			})
 	}

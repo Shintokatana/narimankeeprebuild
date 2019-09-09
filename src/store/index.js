@@ -13,6 +13,7 @@ const store = new Vuex.Store({
 		userInfo: [],
 		uid: null,
 		items: [],
+		searchStatus: false
 	},
 	getters: getters,
 	mutations: mutations,

@@ -7,5 +7,8 @@ export const getters = {
 	},
 	getUID: state => {
 		return state.uid
+	},
+	searchStatus: state => {
+		return state.searchStatus
 	}
 };

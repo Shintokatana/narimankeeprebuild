@@ -10,7 +10,7 @@
 </template>
 
 <script>
-	import singleNote from "@/components/notes/singleNote";
+	import singleNote from "@/components/notes/single/singleNote";
 	import addNote from '@/components/notes/addNote/addNote'
     import draggable from 'vuedraggable'
 

@@ -1,32 +1,35 @@
 <template>
     <div class="single-note col-xl-3 col-lg-3 col-md-6 col-sm-12">
         <div class="note-body">
+            <img class="note-image" :src="newItem.image" alt="">
             <label>
                 <input type="text" ref="title" v-model="newItem.title" @change="commitChanges">
             </label>
             <label>
                 <input type="text" ref="description" v-model="newItem.description" @change="commitChanges">
             </label>
-            <a @click.prevent="deleteItem(item.id)" class="event-icon close-icon" href="#"><icon icon="close"/></a>
+            <a @click.prevent="deleteItem(item.id)" class="event-icon close-icon" href="#">
+                <icon icon="close"/>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
-    import icon from '@/components/global/icon'
+	import icon from '@/components/global/icon'
 
-    export default {
+	export default {
 		name: "singleNote",
 		props: ['item'],
-        components: {
+		components: {
 			icon
-        },
+		},
 		data() {
 			return {
 				newItem: this.item
 			}
 		},
-        methods: {
+		methods: {
 			deleteItem(id) {
 				this.$store.dispatch('deleteItem', id)
 					.catch(error => {
@@ -35,10 +38,10 @@
 			},
 			commitChanges() {
 				this.$store.dispatch('updateItem', this.newItem)
-                    .catch(error => {
+					.catch(error => {
 						console.log(error)
 					})
-            }
+			}
 		}
 	}
 </script>
@@ -52,6 +55,10 @@
         padding: 15px;
         transition: .4s ease all;
 
+        .note-image {
+            width: 100%;
+        }
+
         input {
             background: transparent;
             color: white;
@@ -60,6 +67,7 @@
 
         &:hover {
             background-color: rgba(238, 238, 238, 0.05);
+
             .close-icon {
                 transition: .4s ease all;
                 opacity: 1;

@@ -1,38 +1,67 @@
 <template>
-    <div class="new-item-form">
-        <form action="/">
-            <div>
-                <label>
-                    <input type="text" ref="title" placeholder="Note Title">
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="text" ref="description" placeholder="Note Content">
-                </label>
-            </div>
-            <div>
-                <input type="submit" value="Add Note" @click.prevent="addItem">
-            </div>
+    <div class="new-item-form" v-if="!searchStatus">
+        <form v-click-outside="addItem">
+            <noteDraw v-if="formVisibility" v-on:saveimage="saveImage"/>
+            <label>
+                <input v-show="formVisibility" type="text" v-model="newItem.title" placeholder="Note Title">
+            </label>
+            <label>
+                <input @focus="formVisibility = true" type="text" v-model="newItem.description" placeholder="Note Content">
+            </label>
+            <input v-show="formVisibility" type="submit" value="Add Note" @click.prevent="addItem">
         </form>
     </div>
 </template>
 
 <script>
+	import noteDraw from './addNoteDrawing'
+	import ClickOutside from 'vue-click-outside'
+
 	export default {
 		name: "addNote",
-        methods: {
-			addItem() {
-				let item = {
-					title: this.$refs.title.value,
-					description: this.$refs.description.value
-				};
-				this.$store.dispatch('addItem', item)
-					.catch(error => {
-						console.log(error)
-					})
+		components: {
+			noteDraw
+		},
+		data() {
+			return {
+				newItem: {
+					title: '',
+					description: '',
+					image: ''
+				},
+				formVisibility: false
 			}
-        }
+		},
+        computed: {
+			searchStatus() {
+				return this.$store.getters.searchStatus
+            }
+		},
+		methods: {
+			addItem() {
+				this.formVisibility = false;
+				if(this.newItem.description) {
+					this.$store.dispatch('addItem', this.newItem)
+						.catch(error => {
+							console.log(error)
+						});
+					this.resetItem();
+				}
+			},
+			saveImage(image) {
+				this.newItem.image = image
+			},
+            resetItem() {
+				this.newItem = {
+					title: '',
+					description: '',
+					image: ''
+                }
+            }
+		},
+		directives: {
+			ClickOutside
+		}
 	}
 </script>
 
